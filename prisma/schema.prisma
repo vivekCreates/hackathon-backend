@@ -5,9 +5,25 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String
+  password String
+  role Role @default(PARTICIPANT)
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  PARTICIPANT
+  ORGANIZER
 }
